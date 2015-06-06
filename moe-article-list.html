@@ -1,0 +1,67 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../moe-style/moe-style.html">
+<link rel="import" href="../moe-article-shell/moe-article-shell.html">
+<dom-module id="moe-article-list">
+    <style>
+    :host {
+        box-sizing: border-box;
+    }
+    #article {
+        margin-bottom: 25px;
+        border: solid #ccc ;
+        border-width: 1px 0;
+
+    }
+    </style>
+    <template>
+        <template is="dom-repeat" items="{{datas}}">
+            <moe-article-shell id="article">{{item.index}}</moe-article-shell>
+        </template>
+    </template>
+</dom-module>
+<script>
+Polymer({
+
+    is: 'moe-article-list',
+
+    properties: {
+
+    },
+
+    // Element Lifecycle
+
+    ready: function() {
+        // `ready` is called after all elements have been configured, but
+        // propagates bottom-up. This element's children are ready, but parents
+        // are not.
+        //
+        // This is the point where you should make modifications to the DOM (when
+        // necessary), or kick off any processes the element wants to perform.
+        this.datas = [{
+            "index": "1"
+        }, {
+            "index": "2"
+        }, {
+            "index": "3"
+        }, {
+            "index": "4"
+        }];
+    },
+
+    attached: function() {
+        // `attached` fires once the element and its parents have been inserted
+        // into a document.
+        //
+        // This is a good place to perform any work related to your element's
+        // visual state or active behavior (measuring sizes, beginning animations,
+        // loading resources, etc).
+    },
+
+    detached: function() {
+        // The analog to `attached`, `detached` fires when the element has been
+        // removed from a document.
+        //
+        // Use this to clean up anything you did in `attached`.
+    }
+});
+</script>
