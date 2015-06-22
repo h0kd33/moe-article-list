@@ -1,7 +1,6 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../moe-style/moe-style.html">
-<link rel="import" href="../moe-article-shell/moe-article-shell.html">
 <link rel="import" href="../moe-paragraph/moe-paragraph.html">
 <link rel="import" href="../moe-comment/moe-comment.html">
 <dom-module id="moe-article-list">
@@ -24,17 +23,11 @@
                 <a id="image-anchor" href="#">
                     <img src="../img/image.jpg" alt="">
                 </a>
-                <div>
-                    <span id="comment-title">[[article.commenttitle]]</span>
-                    <span id="user-name">[[article.username]]</span>
-                    <span id="identity">[[article.identity]]</span>
-                    <span><paper-button id="replyBtn" on-click="_openArticle" mini>[返信]</paper-button></span>
-                    <paper-button id="serial-number" mini>[[article.serial]]</paper-button>
-                </div>
-                <moe-paragraph id="paragraph">[[article.CONTENT]]</moe-paragraph>
-                <template is="dom-repeat" items="[[article.comments]]" as="comment">
-                    <!-- <paper-checkbox id="comment-checkbox" on-tap="_toggleSelection"></paper-checkbox> -->
-                    <moe-comment id="comment" commenttitle="無標題" identity="QWEgvm32d" username="[[comment.NAME]]" serial="[[comment.POINT]]" image="[[comment.imgsrc]]" selected="[[comment.selected]]">[[comment.CONTENT]]</moe-comment>
+
+                <moe-paragraph id="paragraph" on-click="_injectHTML">[[article.content]]</moe-paragraph>
+                <template is="dom-repeat" items="[[article.comments]]" as="comment" index-as="comment-index">
+                    <paper-checkbox id="comment-checkbox" on-tap="_toggleSelection"></paper-checkbox>
+                    <moe-comment id="comment" comment-data="[[comment]]"></moe-comment>
                 </template>
             </template>
         </section>
@@ -50,24 +43,12 @@ Polymer({
             type: Array
         }
     },
-
     _openArticle: function() {
         console.log('open-article');
         this.fire('open-article');
     },
-
-    // Element Lifecycle
-    ready: function() {
-        // `ready` is called after all elements have been configured, but
-        // propagates bottom-up. This element's children are ready, but parents
-        // are not.
-        //
-        // This is the point where you should make modifications to the DOM (when
-        // necessary), or kick off any processes the element wants to perform.
-        
-    },
-    attached: function() {
-        // this.$.paragraph.innerHTML = this.$.paragraph.innerText;
+    _injectHTML: function(e) {
+        console.log( e.model);
     }
 });
 </script>
