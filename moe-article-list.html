@@ -23,7 +23,13 @@
                 <a id="image-anchor" href="#">
                     <img src="../img/image.jpg" alt="">
                 </a>
-
+                <div>
+                    <span id="comment-title">[[article.commenttitle]]</span>
+                    <span id="user-name">[[article.username]]</span>
+                    <span id="identity">[[article.identity]]</span>
+                    <span><paper-button id="replyBtn" on-click="_openArticle" mini>[返信]</paper-button></span>
+                    <paper-button id="serial-number" mini>[[article.serial]]</paper-button>
+                </div>
                 <moe-paragraph id="paragraph" on-click="_injectHTML">[[article.content]]</moe-paragraph>
                 <template is="dom-repeat" items="[[article.comments]]" as="comment" index-as="comment-index">
                     <paper-checkbox id="comment-checkbox" on-tap="_toggleSelection"></paper-checkbox>
