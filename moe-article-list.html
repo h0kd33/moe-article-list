@@ -18,8 +18,8 @@
     }
     </style>
     <template>
-        <section id="article">
-            <template is="dom-repeat" items="[[articles]]" as="article">
+        <template id="articleRepeat" is="dom-repeat" items="[[articles]]" as="article" >
+            <section id="article">
                 <a id="image-anchor" href="#">
                     <img src="../img/image.jpg" alt="">
                 </a>
@@ -30,13 +30,13 @@
                     <span><paper-button id="replyBtn" on-click="_openArticle" mini>[返信]</paper-button></span>
                     <paper-button id="serial-number" mini>[[article.serial]]</paper-button>
                 </div>
-                <moe-paragraph id="paragraph" on-click="_injectHTML">[[article.content]]</moe-paragraph>
-                <template is="dom-repeat" items="[[article.comments]]" as="comment" index-as="comment-index">
+                <moe-paragraph id="paragraph" >[[_injectHTML(article.content)]]</moe-paragraph>
+                <template id="commentRepeat" is="dom-repeat" items="[[article.comments]]" as="comment" index-as="comment-index">
                     <paper-checkbox id="comment-checkbox" on-tap="_toggleSelection"></paper-checkbox>
                     <moe-comment id="comment" comment-data="[[comment]]"></moe-comment>
                 </template>
-            </template>
-        </section>
+            </section>
+        </template>
     </template>
 </dom-module>
 <script>
@@ -46,7 +46,7 @@ Polymer({
 
     properties: {
         articles: {
-            type: Array
+            type: Array            
         }
     },
     _openArticle: function() {
@@ -54,7 +54,11 @@ Polymer({
         this.fire('open-article');
     },
     _injectHTML: function(e) {
-        console.log( e.model);
+        // still not working
+        var ele = document.createElement("div");
+        ele.innerHTML  = e;
+        console.log( ele);
+        return ele;
     }
 });
 </script>
