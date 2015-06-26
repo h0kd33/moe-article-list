@@ -11,8 +11,7 @@
         box-sizing: border-box;
     }
     
-    #article {
-    }
+    #article {}
     </style>
     <template>
         <template id="articleRepeat" is="dom-repeat" items="[[articles]]" as="article">
@@ -28,7 +27,15 @@ Polymer({
     properties: {
         articles: {
             type: Array
+
         }
+    },
+    attached: function() {
+        // 延遲文章請求內容
+        this.async( function( ) {
+            this.fire('request-articles');
+            console.log( '[moe-article-list] was attached and fired [request-articles]');
+        }, 3000);
     }
 });
 </script>
