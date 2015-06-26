@@ -29,19 +29,6 @@ Polymer({
         articles: {
             type: Array
         }
-    },
-    _openArticle: function() {
-        console.log('open-article');
-        this.fire('open-article');
-    },
-    _injectHTML: function(e) {
-        // still not working
-        // Polymer.dom(this.$.paragraph).innerHTML = e;
-        var t = '.repeat-paragraph-'+e        
-        
-    },
-    _dynamicClass: function(e) {
-        return 'repeat-paragraph-'+e;
     }
 });
 </script>
