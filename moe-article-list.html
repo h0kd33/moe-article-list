@@ -2,6 +2,7 @@
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../moe-style/moe-style.html">
 <link rel="import" href="../moe-paragraph/moe-paragraph.html">
+<link rel="import" href="../moe-article/moe-article.html">
 <link rel="import" href="../moe-comment/moe-comment.html">
 <dom-module id="moe-article-list">
     <style>
@@ -11,31 +12,11 @@
     }
     
     #article {
-        margin-bottom: 25px;
-        border: solid #ccc;
-        border-width: 1px 0;
-        padding: 0 5px;
     }
     </style>
     <template>
-        <template id="articleRepeat" is="dom-repeat" items="[[articles]]" as="article" >
-            <section id="article">
-                <a id="image-anchor" href="#">
-                    <img src="../img/image.jpg" alt="">
-                </a>
-                <div>
-                    <span id="comment-title">[[article.commenttitle]]</span>
-                    <span id="user-name">[[article.username]]</span>
-                    <span id="identity">[[article.identity]]</span>
-                    <span><paper-button id="replyBtn" on-click="_openArticle" mini>[返信]</paper-button></span>
-                    <paper-button id="serial-number" mini>[[article.serial]]</paper-button>
-                </div>
-                <moe-paragraph id="paragraph" >[[_injectHTML(article.content)]]</moe-paragraph>
-                <template id="commentRepeat" is="dom-repeat" items="[[article.comments]]" as="comment" index-as="comment-index">
-                    <paper-checkbox id="comment-checkbox" on-tap="_toggleSelection"></paper-checkbox>
-                    <moe-comment id="comment" comment-data="[[comment]]"></moe-comment>
-                </template>
-            </section>
+        <template id="articleRepeat" is="dom-repeat" items="[[articles]]" as="article">
+            <moe-article article="[[article]]"> </moe-article>
         </template>
     </template>
 </dom-module>
@@ -46,7 +27,7 @@ Polymer({
 
     properties: {
         articles: {
-            type: Array            
+            type: Array
         }
     },
     _openArticle: function() {
@@ -55,10 +36,12 @@ Polymer({
     },
     _injectHTML: function(e) {
         // still not working
-        var ele = document.createElement("div");
-        ele.innerHTML  = e;
-        console.log( ele);
-        return ele;
+        // Polymer.dom(this.$.paragraph).innerHTML = e;
+        var t = '.repeat-paragraph-'+e        
+        
+    },
+    _dynamicClass: function(e) {
+        return 'repeat-paragraph-'+e;
     }
 });
 </script>
